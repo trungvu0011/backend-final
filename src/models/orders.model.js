@@ -1,0 +1,32 @@
+/* eslint-disable no-console */
+
+// orders-model.js - A KnexJS
+//
+// See http://knexjs.org/
+// for more of what you can do here.
+module.exports = function (app) {
+  const db = app.get('knexClient');
+  const tableName = 'orders';
+  db.schema.hasTable(tableName).then(exists => {
+    if(!exists) {
+      db.schema.createTable(tableName, table => {
+        table.increments('id');
+        table.string('reason');
+        table.string('description');
+        table.dateTime('startTime');
+        table.dateTime('endTime');
+        table.integer('doctorId');
+        table.integer('creatorId');
+        table.dateTime('createdTime');
+        table.integer('approverId');
+        table.dateTime('approvedTime');
+        table.boolean('isApproved').defaultTo(false);
+      })
+        .then(() => console.log(`Created ${tableName} table`))
+        .catch(e => console.error(`Error creating ${tableName} table`, e));
+    }
+  });
+
+
+  return db;
+};
