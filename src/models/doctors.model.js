@@ -1,10 +1,9 @@
-
 module.exports = function (app) {
   const db = app.get('knexClient');
   const tableNameDoctor = 'doctors';
 
   db.schema.hasTable(tableNameDoctor).then(exists => {
-    if(!exists) {
+    if (!exists) {
       db.schema.createTable(tableNameDoctor, table => {
         table.increments('id');
         table.string('email').unique();

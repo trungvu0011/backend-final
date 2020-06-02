@@ -1,5 +1,5 @@
 // Initializes the `users` service on path `/users`
-const { Doctors } = require('./doctors.class');
+const {Doctors} = require('./doctors.class');
 const createModel = require('../../models/doctors.model');
 const hooks = require('./doctors.hooks');
 

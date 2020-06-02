@@ -8,7 +8,7 @@ module.exports = function (app) {
   const db = app.get('knexClient');
   const tableName = 'orders';
   db.schema.hasTable(tableName).then(exists => {
-    if(!exists) {
+    if (!exists) {
       db.schema.createTable(tableName, table => {
         table.increments('id');
         table.string('reason');

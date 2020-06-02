@@ -8,7 +8,7 @@ module.exports = function (app) {
   const db = app.get('knexClient');
   const tableNameUser = 'users';
   db.schema.hasTable(tableNameUser).then(exists => {
-    if(!exists) {
+    if (!exists) {
       db.schema.createTable(tableNameUser, table => {
         table.increments('id');
         table.string('email').unique();
