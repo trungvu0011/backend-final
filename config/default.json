@@ -1,0 +1,55 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "UDKEnmmYUV5KybMKmC5WypI2+gU=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "oauth": {
+      "redirect": "/",
+      "google": {
+        "key": "<google oauth key>",
+        "secret": "<google oauth secret>",
+        "scope": [
+          "email",
+          "profile",
+          "openid"
+        ]
+      },
+      "facebook": {
+        "key": "949592958816266",
+        "secret": "4373e05f2946e7b71f8866acf52bbe5a"
+      },
+      "github": {
+        "key": "66e3094af9dc846f2645",
+        "secret": "3a888d73c6807a197bb4dc4787bc3784e8281425"
+      }
+    }
+  },
+  "mysql": {
+    "client": "mysql2",
+    "connection": "mysql://root:trungvu0011@localhost:3306/login"
+  }
+}
