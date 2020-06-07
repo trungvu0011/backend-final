@@ -51,6 +51,7 @@
     "feathers-cli": "^2.4.0",
     "feathers-knex": "^7.1.0",
     "helmet": "^3.22.0",
+    "jwt-decode": "^2.2.0",
     "knex": "^0.21.1",
     "mysql2": "^2.1.0",
     "serve-favicon": "^2.5.0",
