@@ -1,18 +1,25 @@
 const doctorsHook = require('../../hooks/doctors-hook');
 
+
+const {
+  hashPassword, protect
+} = require('@feathersjs/authentication-local').hooks;
+
 module.exports = {
   before: {
     all: [doctorsHook()],
     find: [],
     get: [],
-    create: [],
+    create: [hashPassword('password')],
     update: [],
     patch: [],
     remove: [],
   },
 
   after: {
-    all: [],
+    all: [
+      protect('password')
+    ],
     find: [],
     get: [],
     create: [],

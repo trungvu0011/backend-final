@@ -10,7 +10,7 @@ module.exports = function (app) {
         table.string('email').unique();
         table.string('password');
         table.string('phone');
-        table.string('experience years');
+        table.string('experienceYears');
         table.string('department');
         table.string('googleId');
         table.string('facebookId');
