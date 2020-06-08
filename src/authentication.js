@@ -37,7 +37,16 @@ module.exports = app => {
   authentication.register('local', new LocalStrategy());
   authentication.register('github', new GitHubStrategy());
   authentication.register('facebook', new FacebookStrategy());
-  app.use('/authentication/users', authentication);
+  app.use('/authentication/users', authentication).hooks({
+    before: {
+      create: [
+        (hook) => {
+          hook.params.payload = hook.params.payload || {};
+          hook.params.payload['authType'] = 'users';
+        }
+      ]
+    }
+  });
 
   const authentication2 = new AuthenticationService(app, 'doctorAuthentication');
 
@@ -45,7 +54,16 @@ module.exports = app => {
   authentication2.register('local', new LocalStrategy());
   authentication2.register('github', new GitHubStrategy());
   authentication2.register('facebook', new FacebookStrategy());
-  app.use('/authentication/doctors', authentication2);
+  app.use('/authentication/doctors', authentication2).hooks({
+    before: {
+      create: [
+        (hook) => {
+          hook.params.payload = hook.params.payload || {};
+          hook.params.payload['authType'] = 'doctors';
+        }
+      ]
+    }
+  });
 
   app.configure(expressOauth());
 };
