@@ -10,10 +10,10 @@ module.exports = function (app) {
   db.schema.hasTable(tableNameUser).then(exists => {
     if (!exists) {
       db.schema.createTable(tableNameUser, table => {
-        table.increments('id');
-        table.string('name');
-        table.string('email').unique();
-        table.string('password');
+        table.increments('id').primary();
+        table.string('name').notNullable();
+        table.string('email').unique().notNullable();
+        table.string('password').notNullable();
         table.string('phone');
         table.string('googleId');
         table.string('facebookId');

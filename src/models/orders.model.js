@@ -10,17 +10,20 @@ module.exports = function (app) {
   db.schema.hasTable(tableName).then(exists => {
     if (!exists) {
       db.schema.createTable(tableName, table => {
-        table.increments('id');
-        table.string('reason');
-        table.string('description');
-        table.dateTime('startTime');
+        table.increments('id').primary();
+        table.string('reason').notNullable();
+        table.dateTime('startTime').notNullable();
         table.dateTime('endTime');
-        table.integer('doctorId');
-        table.integer('creatorId');
-        table.dateTime('createdTime');
+        table.integer('doctorId').unsigned().notNullable();
+        table.integer('creatorId').unsigned().notNullable();
+        table.dateTime('createdTime').defaultTo(db.fn.now());
         table.integer('approverId');
         table.dateTime('approvedTime');
         table.boolean('isApproved').defaultTo(false);
+        table.boolean('isRejected').defaultTo(false);
+
+        table.foreign('doctorId').references('doctors.id');
+        table.foreign('creatorId').references('users.id');
       })
         .then(() => console.log(`Created ${tableName} table`))
         .catch(e => console.error(`Error creating ${tableName} table`, e));
