@@ -31,12 +31,21 @@ class FacebookStrategy extends OAuthStrategy {
 }
 
 module.exports = app => {
-  const authentication = new AuthenticationService(app);
+  const authentication = new AuthenticationService(app, 'userAuthentication');
 
   authentication.register('jwt', new JWTStrategy());
   authentication.register('local', new LocalStrategy());
   authentication.register('github', new GitHubStrategy());
   authentication.register('facebook', new FacebookStrategy());
-  app.use('/authentication', authentication);
+  app.use('/authentication/users', authentication);
+
+  const authentication2 = new AuthenticationService(app, 'doctorAuthentication');
+
+  authentication2.register('jwt', new JWTStrategy());
+  authentication2.register('local', new LocalStrategy());
+  authentication2.register('github', new GitHubStrategy());
+  authentication2.register('facebook', new FacebookStrategy());
+  app.use('/authentication/doctors', authentication2);
+
   app.configure(expressOauth());
 };

@@ -11,6 +11,9 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
           'experienceYears',
           'department'
         ];
+
+        if (hook.params.authenticated)
+          hook.params.query['$select'].push('password');
       case 'create':
         return Promise.resolve(hook);
       default:
