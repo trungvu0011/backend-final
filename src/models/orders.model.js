@@ -16,7 +16,7 @@ module.exports = function (app) {
         table.dateTime('endTime');
         table.integer('doctorId').unsigned().notNullable();
         table.integer('creatorId').unsigned().notNullable();
-        table.dateTime('createdTime').defaultTo(db.fn.now());
+        table.dateTime('createdTime').notNullable();
         table.integer('approverId');
         table.dateTime('approvedTime');
         table.boolean('isApproved').defaultTo(false);
