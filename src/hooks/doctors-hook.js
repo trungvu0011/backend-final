@@ -5,15 +5,18 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     if (hook.method === 'create' || hook.params.authenticated)
       return Promise.resolve(hook);
 
-    const jwt = hook.params.headers.jwt;
-    if (jwt) {
-      const jwtPayload = decodeJwt(jwt);
-      if (jwtPayload.authType === 'doctors' && jwtPayload.sub === hook.id) {
-        return Promise.resolve(hook);
+    if (hook.params.headers) {
+      const jwt = hook.params.headers.jwt;
+      if (jwt) {
+        const jwtPayload = decodeJwt(jwt);
+        if (jwtPayload.authType === 'doctors' && jwtPayload.sub === hook.id) {
+          return Promise.resolve(hook);
+        }
       }
     }
 
     if (hook.method === 'find' || hook.method === 'get') {
+      hook.params.query = hook.params.query || {};
       hook.params.query['$select'] = [
         'name',
         'experienceYears',
@@ -21,8 +24,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       ];
 
       return Promise.resolve(hook);
-    }
-    else {
+    } else {
       throw new Error('Invalid service for doctors');
     }
   };

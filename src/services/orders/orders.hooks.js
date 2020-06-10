@@ -1,3 +1,5 @@
+const ordersHook = require('../../hooks/orders-hook');
+
 module.exports = {
   before: {
     all: [ordersHook()],
@@ -10,7 +12,7 @@ module.exports = {
   },
 
   after: {
-    all: [],
+    all: [ordersHook()],
     find: [],
     get: [],
     create: [],
