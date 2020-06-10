@@ -41,6 +41,9 @@ module.exports = app => {
     before: {
       create: [
         (hook) => {
+          if (hook.path !== 'authentication/users')
+            return;
+
           hook.params.payload = hook.params.payload || {};
           hook.params.payload['authType'] = 'users';
         }
@@ -58,6 +61,9 @@ module.exports = app => {
     before: {
       create: [
         (hook) => {
+          if (hook.path !== 'authentication/doctors')
+            return;
+
           hook.params.payload = hook.params.payload || {};
           hook.params.payload['authType'] = 'doctors';
         }

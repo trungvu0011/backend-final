@@ -10,7 +10,7 @@ module.exports = function (app) {
   db.schema.hasTable(tableName).then(exists => {
     if (!exists) {
       db.schema.createTable(tableName, table => {
-        table.increments('id').primary();
+        table.increments('id');
         table.string('reason').notNullable();
         table.dateTime('startTime').notNullable();
         table.dateTime('endTime');

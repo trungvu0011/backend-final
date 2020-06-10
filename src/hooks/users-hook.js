@@ -2,7 +2,7 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
-  return function usersHook (hook) {
+  return function usersHook(hook) {
     switch (hook.method) {
       case 'find':
       case 'get':
