@@ -1,6 +1,6 @@
 module.exports = {
   before: {
-    all: [],
+    all: [ordersHook()],
     find: [],
     get: [],
     create: [],
