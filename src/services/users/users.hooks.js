@@ -1,4 +1,4 @@
-const {authenticate} = require('@feathersjs/authentication').hooks;
+const usersHook = require('../../hooks/users-hook');
 
 const {
   hashPassword, protect
@@ -6,7 +6,7 @@ const {
 
 module.exports = {
   before: {
-    all: [],
+    all: [usersHook()],
     find: [],
     get: [],
     create: [hashPassword('password')],
